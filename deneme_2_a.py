@@ -91,7 +91,7 @@ def transshipment_problem(supply_capacity, demand_quantity, cost_S_T1, cost_T1_T
 
 original_cost = transshipment_problem(supply_capacities, demand_quantities, c_S_T1, c_T1_T2, c_T2_D)
 
-# Question 2.a: Supply Node 2 Kapasitesi +1
+# Question 2.a: Supply Node 2 capacity increases by 1
 updated_supply = supply_capacities[:]
 updated_supply[2] += 1
 new_cost = transshipment_problem(updated_supply, demand_quantities, c_S_T1, c_T1_T2, c_T2_D)
