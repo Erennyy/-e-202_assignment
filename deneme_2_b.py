@@ -33,54 +33,54 @@ def transshipment_problem(supply_capacity, demand_quantity, cost_S_T1, cost_T1_T
 
     model = pulp.LpProblem("MultiLayer_Transshipment", pulp.LpMinimize)
 
-    # 2. Değişkenlerin Elle Tanımlanması
+    # Introducing LP Problem Variables
     X_S_T1 = {}
     X_T1_T2 = {}
     X_T2_D = {}
 
-    # Arzdan ilk katmana
+    # Supply Nodes to First Layer of Transshipment Nodes
     for i in range(no_of_supply_nodes):
         for j in range(no_of_first_layer_transshipment_nodes):
             X_S_T1[(i, j)] = pulp.LpVariable(f"X_S_T1_{i}_{j}", lowBound=0, cat="Continuous")
 
-    # İlk katmandan ikinci katmana
+    # First Layer of Transshipment Nodes to Second Layer of Transshipment Nodes
     for j in range(no_of_first_layer_transshipment_nodes):
         for k in range(no_of_second_layer_transshipment_nodes):
             X_T1_T2[(j, k)] = pulp.LpVariable(f"X_T1_T2_{j}_{k}", lowBound=0, cat="Continuous")
 
-    # İkinci katmandan talep noktalarına
+    # Second Layer of Transshipment Nodes to Demand Nodes
     for k in range(no_of_second_layer_transshipment_nodes):
         for l in range(no_of_demand_nodes):
             X_T2_D[(k, l)] = pulp.LpVariable(f"X_T2_D_{k}_{l}", lowBound=0, cat="Continuous")
 
-    # 3. Amaç Fonksiyonu
+    # Setting the Objective Function
     model += (
         pulp.lpSum(cost_S_T1[i][j] * X_S_T1[(i, j)] for i in range(no_of_supply_nodes) for j in range(no_of_first_layer_transshipment_nodes)) +
         pulp.lpSum(cost_T1_T2[j][k] * X_T1_T2[(j, k)] for j in range(no_of_first_layer_transshipment_nodes) for k in range(no_of_second_layer_transshipment_nodes)) +
         pulp.lpSum(cost_T2_D[k][l] * X_T2_D[(k, l)] for k in range(no_of_second_layer_transshipment_nodes) for l in range(no_of_demand_nodes))
     )
 
-    # 4. Kısıtlar
-    # Arz Kapasite Kısıtları
+    # Constraints
+    # Supply Quota Restrictions
     for i in range(no_of_supply_nodes):
         model += pulp.lpSum(X_S_T1[(i, j)] for j in range(no_of_first_layer_transshipment_nodes)) <= supply_capacity[i]
 
-    # İlk Katman Denge Kısıtları
+    # First Layer Quaota Restrictions
     for j in range(no_of_first_layer_transshipment_nodes):
         model += pulp.lpSum(X_S_T1[(i, j)] for i in range(no_of_supply_nodes)) == pulp.lpSum(X_T1_T2[(j, k)] for k in range(no_of_second_layer_transshipment_nodes))
 
-    # İkinci Katman Denge Kısıtları
+    # Second Layer Quota Restrictions
     for k in range(no_of_second_layer_transshipment_nodes):
         model += pulp.lpSum(X_T1_T2[(j, k)] for j in range(no_of_first_layer_transshipment_nodes)) == pulp.lpSum(X_T2_D[(k, l)] for l in range(no_of_demand_nodes))
 
-    # Talep Kısıtları
+    # Demand Quota Restrictins
     for l in range(no_of_demand_nodes):
         model += pulp.lpSum(X_T2_D[(k, l)] for k in range(no_of_second_layer_transshipment_nodes)) >= demand_quantity[l]
 
-    # 5. Modeli Çöz
+    # Integrated Functions that Solving LP Problem    
     model.solve()
 
-    # 6. Sonuçları Yazdır
+    # 6. Results
     print("Total Cost:", pulp.value(model.objective))
     print("Basic Variables:")
     for v in model.variables():
@@ -91,7 +91,7 @@ def transshipment_problem(supply_capacity, demand_quantity, cost_S_T1, cost_T1_T
 
 original_cost = transshipment_problem(supply_capacities, demand_quantities, c_S_T1, c_T1_T2, c_T2_D)
 
-# Question 2.b: Supply Node 0 Kapasitesi +1
+# Question 2.b: Supply Node 0 capacity increases by 1
 updated_supply = supply_capacities[:]
 updated_supply[0] += 1
 new_cost = transshipment_problem(updated_supply, demand_quantities, c_S_T1, c_T1_T2, c_T2_D)
