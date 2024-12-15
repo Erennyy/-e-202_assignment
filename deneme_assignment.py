@@ -89,6 +89,6 @@ def transshipment_problem(supply_capacity, demand_quantity, cost_S_T1, cost_T1_T
     print("-" * 50)
     return pulp.value(model.objective)
 
-# Question 1: Orijinal Model
+# Question 1
 original_cost = transshipment_problem(supply_capacities, demand_quantities, c_S_T1, c_T1_T2, c_T2_D)
 
