@@ -99,5 +99,5 @@ def transshipment_problem(supply_capacity, demand_quantity, cost_S_T1, cost_T1_T
     return pulp.value(model.objective)
 
 # The transshipment problem with the original data
-original_cost = transshipment_problem(supply_capacities, demand_quantities, cost_S_T1, cost_T1_T2, cost_T2_D)import pulp
+original_cost = transshipment_problem(supply_capacities, demand_quantities, cost_S_T1, cost_T1_T2, cost_T2_D)
 
