@@ -1,4 +1,4 @@
-
+import pulp
 # Define the number of nodes in each layer
 number_of_supply_nodes = 4
 number_of_first_layer_transshipment_nodes = 3
@@ -100,8 +100,7 @@ def transshipment_problem(supply_capacity, demand_quantity, cost_S_T1, cost_T1_T
 original_cost = transshipment_problem(supply_capacities, demand_quantities, cost_S_T1, cost_T1_T2, cost_T2_D)
 
 # Question 3: Supply Node 0 Cannot Ship to First Layer Node 0
-updated_cost_S_T1 = [row[:] for row in cost_S_T1]
-updated_cost_S_T1[0][0] = 1000000000000000  # Prevent flow by setting cost to a large number
+updated_cost_S_T1 = [row[:] for row in cost_S_T1] # Create to update
+updated_cost_S_T1[0][0] = 1000000000000000  # Assign a high number to prevent the flow-in
 new_cost = transshipment_problem(supply_capacities, demand_quantities, updated_cost_S_T1, cost_T1_T2, cost_T2_D)
 print("Cost Change:", new_cost - original_cost)
-
