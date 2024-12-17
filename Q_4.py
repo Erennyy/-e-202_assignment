@@ -102,6 +102,6 @@ def update_and_solve(cost_S_T1, cost_T1_T2, cost_T2_D, supply_capacities, modifi
     mod_demand = modified_quantities if modified_quantities else demand_quantities
     return transshipment_problem(supply_capacities, mod_demand, cost_S_T1, cost_T1_T2, cost_T2_D)
 
-update_and_solve(c_S_T1, c_T1_T2, c_T2_D,supply_capacities, modified_quantities = [300, 203, 355, 171])
+update_and_solve(cost_S_T1, cost_T1_T2, cost_T2_D, supply_capacities, modified_quantities = [300, 203, 355, 171])
 
 # Result of our calculation is when Demand + 19 : Total Cost = 61443.0
