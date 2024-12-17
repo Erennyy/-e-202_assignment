@@ -1,6 +1,6 @@
 import pulp
 
-# Define the number of numberdes in each layer
+# Define the number of nodes in each layer
 number_of_supply_nodes = 4
 number_of_first_layer_transshipment_nodes = 3
 number_of_second_layer_transshipment_nodes = 5
