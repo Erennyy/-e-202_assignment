@@ -102,7 +102,7 @@ def transshipment_problem(supply_capacity, demand_quantity, cost_S_T1, cost_T1_T
 original_cost = transshipment_problem(supply_capacities, demand_quantities, cost_S_T1, cost_T1_T2, cost_T2_D)
 
 # Question 2.e: Cost from Supply Node 0 to First Layer Node 2 Decreases by 1
-updated_cost_S_T1 = [row[:] for row in c_S_T1]
+updated_cost_S_T1 = [row[:] for row in cost_S_T1]
 updated_cost_S_T1[0][2] -= 1
 new_cost = transshipment_problem(supply_capacities, demand_quantities, updated_cost_S_T1, cost_T1_T2, cost_T2_D)
 print("Cost Change:", new_cost - original_cost)
