@@ -1,6 +1,6 @@
 import pulp
 
-# Define the number of numberdes in each layer
+# Define the number of nodes in each layer
 number_of_supply_nodes = 4
 number_of_first_layer_transshipment_nodes = 3
 number_of_second_layer_transshipment_nodes = 5
@@ -104,5 +104,5 @@ original_cost = transshipment_problem(supply_capacities, demand_quantities, cost
 # Question 2.b: Supply Node 0 capacity increases by 1
 updated_supply = supply_capacities[:]
 updated_supply[0] += 1
-new_cost = transshipment_problem(updated_supply, demand_quantities, c_S_T1, c_T1_T2, c_T2_D)
+new_cost = transshipment_problem(updated_supply, demand_quantities, cost_S_T1, cost_T1_T2, cost_T2_D)
 print("Cost Change:", new_cost - original_cost)
