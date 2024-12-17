@@ -104,4 +104,4 @@ def update_and_solve(cost_S_T1, cost_T1_T2, cost_T2_D, supply_capacities, modifi
 
 update_and_solve(c_S_T1, c_T1_T2, c_T2_D,supply_capacities, modified_quantities = [300, 203, 355, 171])
 
-# Result of our calculation is Demand + 19 : Total Cost = 61443.0
+# Result of our calculation is when Demand + 19 : Total Cost = 61443.0
