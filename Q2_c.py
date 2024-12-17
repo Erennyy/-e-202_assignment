@@ -105,5 +105,5 @@ original_cost = transshipment_problem(supply_capacities, demand_quantities, cost
 # Question 2.c: Demand at Demand Node 0 Increases by 1 Unit
 updated_demand = demand_quantities[:]
 updated_demand[0] += 1
-new_cost = transshipment_problem(supply_capacities, updated_demand, c_S_T1, c_T1_T2, c_T2_D)
+new_cost = transshipment_problem(supply_capacities, updated_demand, cost_S_T1, cost_T1_T2, cost_T2_D)
 print("Cost Change:", new_cost - original_cost)
